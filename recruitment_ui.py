@@ -11,9 +11,29 @@ st.set_page_config(
 # 页面标题
 st.title("2025FOS-面试信息查询页面")
 
+def read_encrypted_excel(file_path, password):
+    # 创建内存缓冲区
+    decrypted = BytesIO()
+    
+    # 读取加密文件并解密
+    with open(file_path, "rb") as f:
+        office_file = msoffcrypto.OfficeFile(f)
+        # 验证密码并解密（注意：密码区分大小写）
+        office_file.load_key(password=password)
+        # 将解密后的内容写入内存缓冲区
+        office_file.decrypt(decrypted)
+    
+    # 将文件指针重置到开头，以便pandas读取
+    decrypted.seek(0)
+    
+    # 用pandas读取解密后的Excel文件
+    df = pd.read_excel(decrypted, engine="openpyxl")
+    return df
+    
 # 指定Excel文件路径 - 请在此处修改为你的Excel文件实际路径
-EXCEL_FILE_PATH = "students_results.xlsx"  # 例如: "C:/data/students.xlsx" 或 "./data/results.xlsx"
-
+EXCEL_FILE_PATH = "results.xlsx"  # 例如: "C:/data/students.xlsx" 或 "./data/results.xlsx"
+EXCEL_PASSWORD = st.secrets["DB_PASSWORD"]
+st.write("DB password:", st.secrets["db_password"])
 # 初始化数据框
 df = None
 
@@ -24,7 +44,8 @@ try:
         st.error(f"指定路径的文件不存在: {EXCEL_FILE_PATH}")
     else:
         # 读取Excel文件
-        df = pd.read_excel(EXCEL_FILE_PATH)
+        # df = pd.read_excel(EXCEL_FILE_PATH)
+        df = read_encrypted_excel(EXCEL_FILE_PATH, EXCEL_PASSWORD)
         
         # 检查数据是否包含所需的列
         required_columns = ['姓名', '学号', '结果']
