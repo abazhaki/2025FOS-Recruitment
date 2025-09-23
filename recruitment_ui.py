@@ -4,7 +4,7 @@ import os
 
 # 设置页面标题和布局
 st.set_page_config(
-    page_title="学生结果查询页面",
+    page_title="2025FOS-面试信息查询页面",
     layout="wide"
 )
 
