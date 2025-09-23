@@ -33,7 +33,7 @@ def read_encrypted_excel(file_path, password):
 # 指定Excel文件路径 - 请在此处修改为你的Excel文件实际路径
 EXCEL_FILE_PATH = "results.xlsx"  # 例如: "C:/data/students.xlsx" 或 "./data/results.xlsx"
 EXCEL_PASSWORD = st.secrets["DB_PASSWORD"]
-st.write("DB password:", st.secrets["db_password"])
+st.write("DB password:", st.secrets["DB_PASSWORD"])
 # 初始化数据框
 df = None
 
