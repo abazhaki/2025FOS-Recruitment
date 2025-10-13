@@ -56,6 +56,13 @@ try:
             df = None
         else:
             st.success("感谢您对2025FOS的支持与配合！")
+            st.image(
+            st.secrets["WECHAT_QRCODE_BASE64"],  # 从Secrets读取Base64
+            caption="请扫码加入微信群，群内将同步面试注意事项",
+            use_column_width=False,
+            width=250
+            )
+            st.warning("⚠️ 仅限本人加入，请勿转发二维码")
             # 显示数据预览（可选，可注释掉）
             # with st.expander("点击查看数据预览"):
             #     st.dataframe(df)
