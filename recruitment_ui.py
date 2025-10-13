@@ -59,7 +59,7 @@ try:
             st.image(
             st.secrets["WECHAT_QRCODE_BASE64"],  # 从Secrets读取Base64
             caption="请扫码加入微信群，群内将同步面试注意事项",
-            use_column_width=False,
+            use_container_width=False,
             width=100
             )
             st.warning("⚠️ 仅限本人加入，请勿转发二维码")
