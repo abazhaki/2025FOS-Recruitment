@@ -123,6 +123,8 @@ try:
                         if result.iloc[0]['通过结果'] == '是':
                             st.balloons()
                             st.success("恭喜你通过初试，进入面试环节！")
+                            if option == '2023级小朋友':
+                                st.info(f"面试组别：{result.iloc[0]['组别']}")
                             st.info(f"面试时间：{result.iloc[0]['面试时间']}")
                             st.info(f"面试教室：{result.iloc[0]['面试地点']}")
                             st.info(f"{result.iloc[0]['结果']}")
